@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.6'
+    id 'org.springframework.boot' version '2.5.12'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -27,12 +27,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
-//    //security
-//    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.4.2'
-//    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.2'
-//    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.4.2'
-//    //jwt
-//    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    //security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 }
 
 tasks.named('test') {
