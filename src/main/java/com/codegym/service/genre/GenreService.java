@@ -29,7 +29,7 @@ public class GenreService implements IGenreService {
 
     @Override
     public void removeById(Long id) {
-        genreRepository.deleteById(id);
+        genreRepository.deleteGenre(id);
     }
     @Override
     public Iterable<Genre> findGenreByNameContaining(String name) {
