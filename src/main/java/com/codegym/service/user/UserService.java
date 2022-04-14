@@ -60,4 +60,15 @@ public class UserService implements IUserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public User saveAdmin(User user) {
+        String password = user.getPassword();
+        String encodePassword = passwordEncoder.encode(password);//Mã hóa pass của người dùng
+        user.setPassword(encodePassword);
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role(1L, "ROLE_ADMIN"));
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
 }
