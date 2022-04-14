@@ -77,7 +77,7 @@ public class AuthorController {
 
 
     @PostMapping("/{id}")
-    public ResponseEntity<Author> updateProduct(@PathVariable Long id, @ModelAttribute AuthorForm authorForm) {
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @ModelAttribute AuthorForm authorForm) {
         Optional<Author> oldAuthor = authorService.findById(id);
         if (!oldAuthor.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -106,7 +106,7 @@ public class AuthorController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Author> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Author> DeleteAuthor(@PathVariable Long id) {
         Optional<Author> productOptional = authorService.findById(id);
         if (!productOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
