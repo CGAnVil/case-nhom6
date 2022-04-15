@@ -35,7 +35,7 @@ public class BookController {
     public ResponseEntity<Page<Book>> findAll(@RequestParam(name = "q") Optional<String> q, @PageableDefault(value = 5) Pageable pageable) {
         Page<Book> books = bookService.findAll(pageable);
         if (q.isPresent()) {
-            books = bookService.findProductByNameContaining(q.get(), pageable);
+            books = bookService.findProductByNameContaining(q.get(),pageable);
         }
         return new ResponseEntity<>(books, HttpStatus.OK);
     }

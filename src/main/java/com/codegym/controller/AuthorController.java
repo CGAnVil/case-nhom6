@@ -33,17 +33,11 @@ public class AuthorController {
 
     @GetMapping
     public ResponseEntity<Page<Author>> findAll(@RequestParam(name = "q") Optional<String> q, @PageableDefault(value = 5) Pageable pageable) {
-        Page<Author> authors;
-        if (!q.isPresent()) {
-            authors = authorService.findAll(pageable);
-        } else {
+        Page<Author> authors = authorService.findAll(pageable);
+        if (q.isPresent()) {
             authors = authorService.findByNameContaining(q.get(), pageable);
         }
-        if (authors.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
         return new ResponseEntity<>(authors, HttpStatus.OK);
-
     }
 
 
