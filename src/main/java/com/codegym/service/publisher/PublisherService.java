@@ -23,7 +23,7 @@ public class PublisherService implements IPublisherService{
 
     @Override
     public void removeById(Long id) {
-        publisherRepository.deleteById(id);
+        publisherRepository.deletePublisher(id);
     }
 
     @Override

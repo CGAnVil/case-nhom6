@@ -3,8 +3,13 @@ package com.codegym.config.security;
 import com.codegym.config.CustomAccessDeniedHandler;
 import com.codegym.config.JwtAuthenticationFilter;
 import com.codegym.config.RestAuthenticationEntryPoint;
+import com.codegym.model.Role;
+import com.codegym.model.User;
+import com.codegym.repository.IRoleRepository;
+import com.codegym.service.role.IRoleService;
 import com.codegym.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,11 +23,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IRoleService roleService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
 
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -74,5 +91,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors();
+    }
+
+    @PostConstruct
+    public void init() {
+        List<User> users = (List<User>) userService.findAll();
+        List<Role> roleList = (List<Role>) roleService.findAll();
+        if (roleList.isEmpty()) {
+            Role roleAdmin = new Role();
+            roleAdmin.setId(1L);
+            roleAdmin.setName("ROLE_ADMIN");
+            roleService.save(roleAdmin);
+            Role roleCoach = new Role();
+            roleCoach.setId(2L);
+            roleCoach.setName("ROLE_USER");
+            roleService.save(roleCoach);
+        }
+        if (users.isEmpty()) {
+            User user = new User("admin","12345");
+            userService.saveAdmin(user);
+        }
     }
 }
