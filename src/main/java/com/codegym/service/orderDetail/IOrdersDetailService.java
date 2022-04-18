@@ -9,5 +9,5 @@ public interface IOrdersDetailService extends IGeneralService<OrderDetail> {
 
     Iterable<OrderDetail> findAllByOrders(Order order);
 
-    Integer showOrderdetailbyOrder(Long id);
+    Iterable<OrderDetail> showOrderDetailByOrder(Long id);
 }

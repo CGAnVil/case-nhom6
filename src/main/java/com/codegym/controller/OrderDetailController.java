@@ -17,8 +17,12 @@ public class OrderDetailController {
     private IOrdersDetailService ordersDetailService;
 
     @GetMapping
-    public ResponseEntity<Iterable<OrderDetail>> getAllOrdersDetail() {
-        return new ResponseEntity<>(ordersDetailService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<OrderDetail>> getAllOrdersDetail(@RequestParam(name = "id") Optional<Long> id) {
+        Iterable<OrderDetail> orderDetails = ordersDetailService.findAll();
+        if (id.isPresent()){
+            orderDetails = ordersDetailService.showOrderDetailByOrder(id.get());
+        }
+        return new ResponseEntity<>(orderDetails, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

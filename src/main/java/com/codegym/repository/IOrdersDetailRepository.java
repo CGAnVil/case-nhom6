@@ -16,5 +16,5 @@ public interface IOrdersDetailRepository extends JpaRepository<OrderDetail,Long>
     Iterable<OrderDetail> findAllByOrder(Order order);
 
     @Query(value = "select * from order_detail where order_id=?1", nativeQuery = true)
-    Integer showOrderdetailbyOrder(Long id);
+    Iterable<OrderDetail> showOrderDetailByOrder(Long id);
 }
