@@ -51,4 +51,11 @@ public class JwtService {
                 .getBody().getSubject();
         return userName;
     }
+
+    public String getToken(String Authorization){
+        if(Authorization != null && Authorization.startsWith("Bearer")) {
+            return Authorization.replace("Bearer", "");
+        }
+        return null;
+    }
 }

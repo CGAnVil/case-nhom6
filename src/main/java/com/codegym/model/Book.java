@@ -22,6 +22,7 @@ public class Book {
     @NotEmpty
     private String name;
 
+
     @Column(nullable = false)
     @NotNull
     private double price;
