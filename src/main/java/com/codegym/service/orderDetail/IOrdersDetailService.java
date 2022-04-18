@@ -8,4 +8,6 @@ public interface IOrdersDetailService extends IGeneralService<OrderDetail> {
     Integer sumProductAmount(Long id);
 
     Iterable<OrderDetail> findAllByOrders(Order order);
+
+    Integer showOrderdetailbyOrder(Long id);
 }

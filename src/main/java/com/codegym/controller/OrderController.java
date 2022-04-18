@@ -27,11 +27,12 @@ public class OrderController {
     private IUserService userService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Order>> getAllOrders(@RequestParam Integer status) {
-        if (status == null) {
+    public ResponseEntity<Iterable<Order>> getAllOrders() {
+//        @RequestParam Integer status
+//        if (status == null) {
             return new ResponseEntity<>(ordersService.findAll(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(ordersService.findAllByStatus(status), HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(ordersService.findAllByStatus(status), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

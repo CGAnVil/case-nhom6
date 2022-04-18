@@ -43,4 +43,9 @@ public class OrdersDetailService implements IOrdersDetailService{
     public Iterable<OrderDetail> findAllByOrders(Order order) {
         return ordersDetailRepository.findAllByOrder(order);
     }
+
+    @Override
+    public Integer showOrderdetailbyOrder(Long id) {
+        return ordersDetailRepository.showOrderdetailbyOrder(id);
+    }
 }
